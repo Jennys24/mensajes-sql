@@ -11,66 +11,60 @@
   <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
-  <h2 class="mx-auto d-block shadow p-3 mb-5 rounded">The Dojo Message Board</h2>
+  <h2 class="mx-auto d-block text-center shadow p-3 mb-3 rounded">The Dojo Message Board</h2>
 
-  <div class="container">
-    <div class="row border-4 rounded-start">
+  <div class="container border">
 
-      <form action="/" method="POST" class="col-8 offset-2 formulario border-4 shadow rounded">
-        
+    <div class="row">
+
+      <form action="/" method="POST" class="col-8 offset-2 formulario">
         <div class="row mb-3">
           <label for="name" class="col-sm-2 col-form-label">Name:</label>
           <input type="text" class="form-control" name="name" required>
-
           <label for="post" class="col-sm-2 col-form-label">Message:</label>
           <textarea id="content" name="post" rows="4" cols="50" required></textarea>
         </div>
+
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <button class="btn btn-primary" type="submit">Post message</button>
+          <button class="btn btn-primary mb-3" type="submit">Post message</button>
         </div>
-      
-        
+
       </form>
+
     </div>
-    
-    <div id="messages">
-      <% for (message of messages) { %>
-      <!-- Primer mensaje-->
-      <div class="message">
-        <h3>Name: <%=message.name%>.</h4>
-        <h4>Menssage: "<%= menssage.post%>"</h4>
-        <div class="comments">
-          <h5>Que buen mensaje</h5>
-          <p>Cualquier persona</p>
-
-          <h5>Que mal mensaje</h5>
-          <p>Otro gallo</p>
+    <br>
+    <div class="message">
+      
+      <% for (message of Mssge) { %>
+        <div class="border border-1 p-5 rounded-start m-3"><!--contenido-->
+          <h3 class="bg-gradient">Name: <%= message.name %></h4>
+          <h4>Message: <%= message.post %></h4>
+            
+          <% for (comenty of Commentary) { %>
+            <h3>Name: <%= comenty.names %></h4>
+            <h4>Message: <%= comenty.comt %></h4>
+          <% } %>
+          <br>  <!--Comentario-->
+          <div class="row comments border border-1 rounded-start justify-content-md-end">
+            <form action="/" method="POST" class="col offset-1 formulario border-4 shadow rounded">
+              <input type="hidden" name="msgId" class="form-control" value="<%= Mssge.id %>">
+            <div class="col col-11">
+              <label for="names" class="col-sm-2 col-form-label">Name:</label>
+              <input type="text" class="form-control" name="names" required>
+              <label for="post" name="comt" class="col-sm-2 col-form-label">Commentary:</label>
+              <textarea class="form-control" id="" name="comt" required></textarea>
+            </div>
+            <br>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-info mb-3" type="submit">post commentary</button>
+            </div>  
+            
+          </form>    
         </div>
-
-        <form action="">
-
-        </form>
-        <% } %>
       </div>
+      <% } %>
 
-      <!-- Segundo mensaje-->
-      <div class="message">
-        <h2>Mi primer mensje</h2>
-        <h4>anonimo</h4>
-        <div class="comments">
-          <h5>Que buen mensaje</h5>
-          <p>Cualquier persona</p>
-
-          <h5>Que mal mensaje</h5>
-          <p>Otro gallo</p>
-        </div>
-
-        <form action="">
-          
-        </form>
-      </div>
-    </div>
-  
-  </div>
+    </div><!-- final message-->
+  </div><!--final container-->
 </body>
 </html>

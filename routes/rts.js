@@ -1,26 +1,43 @@
 const { Router } = require('express');
 const router = Router();
 
-const { Message, Commentary } = require('../db');
+const { Mssge, Commentary } = require('../db');
 
 router.get('/', async (req, res) => {
+  const message = await Mssge.findAll(
+    {include: [Commentary]}
+  );
 
-  const message = await Message.findAll();
-	res.render('index.ejs')
+  const comments = await Commentary.findAll(
+    {include: [Mssge]}
+  );
 
+	res.render('index', {Mssge: message, Commentary: comments});
 });
+
 
 router.post('/', async (req, res) =>{
 
-  let messenger = await Message.create({
+  const messages = await Mssge.create({
     name : req.body.name,
     post : req.body.post
-  })
-  console.log(messenger);
+  });
+
+  console.log(messages);
   res.redirect('/');
 });
 
 
+router.post('/', async (req, res) =>{
+
+  const commentary = await Commentary.create({
+    name : req.body.names,
+    comt : req.body.comt,
+    mgId: req.body.mgId
+  })
+  
+  res.redirect('/');
+});
 
 
 module.exports = router;

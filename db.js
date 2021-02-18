@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 
-
 // acá creamos la conexión a la Base de Datos
 const sql = new Sequelize('tableros', 'root', 'abigail', {
   host: 'localhost',
@@ -8,7 +7,7 @@ const sql = new Sequelize('tableros', 'root', 'abigail', {
 });
 
 // acá inicializamos los modelos (tablas)
-const Message = sql.define('Message', {
+const Mssge = sql.define('Mssge', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -68,8 +67,8 @@ const Commentary = sql.define('Commentary', {
   }
 });
 
-Message.hasMany(Commentary); 
-Commentary.belongsTo(Message); 
+Mssge.hasMany(Commentary); 
+Commentary.belongsTo(Mssge); 
 
 //  después sincronizamos nuestro código con la base de datos
 sql.sync()
@@ -79,6 +78,6 @@ sql.sync()
 
 // finalmente acá listamos todos los modelos que queremos exportar
 module.exports = {
-  Message,
+  Mssge,
   Commentary
 };
