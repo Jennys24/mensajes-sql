@@ -13,12 +13,15 @@ console.log(message);
 
 
 router.post('/', async (req, res) =>{
-
   const messages = await Mssge.create({
     name : req.body.name,
     post : req.body.post
   });
 
+  if(req.body.name =="" || req.body.post ==""){
+    return res.send("fallo");
+  };
+  
   console.log(messages);
   res.redirect('/');
 });
@@ -30,7 +33,11 @@ router.post('/comentario', async (req, res) =>{
     name : req.body.names,
     post : req.body.comt,
     MssgeId: req.body.msgId
-  })
+  });
+
+  if(req.body.names =="" || req.body.comt ==""){
+    return res.send("fallo de nuevo");
+  };
 
   
   res.redirect('/');
