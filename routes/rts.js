@@ -7,12 +7,8 @@ router.get('/', async (req, res) => {
   const message = await Mssge.findAll(
     {include: [Commentary]}
   );
-
-  const comments = await Commentary.findAll(
-    {include: [Mssge]}
-  );
-
-	res.render('index', {Mssge: message, Commentary: comments});
+console.log(message);
+	res.render('index', {Mssge: message});
 });
 
 
@@ -28,13 +24,14 @@ router.post('/', async (req, res) =>{
 });
 
 
-router.post('/', async (req, res) =>{
-
+router.post('/comentario', async (req, res) =>{
+  console.log(req.body);
   const commentary = await Commentary.create({
     name : req.body.names,
-    comt : req.body.comt,
-    mgId: req.body.mgId
+    post : req.body.comt,
+    MssgeId: req.body.msgId
   })
+
   
   res.redirect('/');
 });

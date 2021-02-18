@@ -20,9 +20,9 @@
       <form action="/" method="POST" class="col-8 offset-2 formulario">
         <div class="row mb-3">
           <label for="name" class="col-sm-2 col-form-label">Name:</label>
-          <input type="text" class="form-control" name="name" required>
+          <input type="text" class="form-control" placeholder="user" name="name" required>
           <label for="post" class="col-sm-2 col-form-label">Message:</label>
-          <textarea id="content" name="post" rows="4" cols="50" required></textarea>
+          <textarea id="content" name="post" placeholder="agrega un mensaje" rows="4" cols="50" required></textarea>
         </div>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -35,24 +35,24 @@
     <br>
     <div class="message">
       
-      <% for (message of Mssge) { %>
+      <% for (let message of Mssge) { %>
         <div class="border border-1 p-5 rounded-start m-3"><!--contenido-->
           <h3 class="bg-gradient">Name: <%= message.name %></h4>
-          <h4>Message: <%= message.post %></h4>
+          <h4>- Message: <%= message.post %></h4>
             
-          <% for (comenty of Commentary) { %>
-            <h3>Name: <%= comenty.names %></h4>
-            <h4>Message: <%= comenty.comt %></h4>
+          <% for (let comenty of message.Commentaries) { %>
+            <h5 class="bg-gradient">Name: <%= comenty.name %></h5>
+            <p>- Comentario: <%= comenty.post %></p>
           <% } %>
           <br>  <!--Comentario-->
           <div class="row comments border border-1 rounded-start justify-content-md-end">
-            <form action="/" method="POST" class="col offset-1 formulario border-4 shadow rounded">
-              <input type="hidden" name="msgId" class="form-control" value="<%= Mssge.id %>">
+            <form action="/comentario" method="POST" class="col offset-1 formulario border-4 shadow rounded">
+              <input type="hidden" name="msgId" class="form-control" value="<%= message.id %>">
             <div class="col col-11">
               <label for="names" class="col-sm-2 col-form-label">Name:</label>
-              <input type="text" class="form-control" name="names" required>
+              <input type="text" class="form-control" placeholder="user" name="names" required>
               <label for="post" name="comt" class="col-sm-2 col-form-label">Commentary:</label>
-              <textarea class="form-control" id="" name="comt" required></textarea>
+              <textarea class="form-control" id="areatx" placeholder="agrega un comentario" name="comt" required></textarea>
             </div>
             <br>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
